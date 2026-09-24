@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#fff4f7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<title>Для тебя</title>
+
+<style>
+/* =========================================================
+   ОСНОВА
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
+    color: #351b24;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 180, 200, .35),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(255, 210, 220, .45),
+            transparent 35%
+        ),
+        #fff5f7;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ЭКРАН
+========================================================= */
+
+.screen {
+    width: 100%;
+    height: 100dvh;
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        20px
+        max(20px, env(safe-area-inset-bottom));
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.screen.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   КАРТОЧКА
+========================================================= */
+
+.card {
+    width: min(440px, 100%);
+    max-height: calc(100dvh - 40px);
+
+    padding: 34px 25px;
+
+    overflow-y: auto;
+
+    border-radius: 32px;
+
+    background: rgba(255,255,255,.78);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(120,45,70,.15),
+        inset 0 1px 0 rgba(255,255,255,.8);
+
+    text-align: center;
+
+    animation: screenIn .55s ease;
+}
+
+@keyframes screenIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+   ТИПОГРАФИКА
+========================================================= */
+
+h1 {
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #765661;
+    font-size: 16px;
+    line-height: 1.55;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   ГЛАВНОЕ СЕРДЦЕ
+========================================================= */
+
+.big-heart {
+    width: 95px;
+    height: 95px;
+
+    margin: 0 auto 25px;
+
+    border-radius: 50%;
+
+    background: #ffe0e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 50px;
+
+    box-shadow:
+        0 15px 35px rgba(230,70,110,.18);
+
+    animation: heartbeat 1.8s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.08);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.06);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   КНОПКИ
+========================================================= */
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+button {
+    font: inherit;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.primary {
+    width: min(300px, 100%);
+
+    padding: 16px 22px;
+
+    border-radius: 18px;
+
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6689,
+            #ed315e
+        );
+
+    box-shadow:
+        0 12px 25px rgba(237,49,94,.25);
+
+    transition: .2s;
+}
+
+.primary:active {
+    transform: scale(.96);
+}
+
+.secondary {
+    width: min(300px, 100%);
+
+    padding: 15px 22px;
+
+    border-radius: 18px;
+
+    color: #7d5963;
+
+    background: #fff0f3;
+
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.secondary:active {
+    transform: scale(.97);
+}
+
+.back {
+    margin-top: 15px;
+
+    background: transparent;
+
+    color: #a27d87;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ПРОГРЕСС
+========================================================= */
+
+.progress {
+    display: flex;
+    gap: 6px;
+
+    margin-bottom: 25px;
+}
+
+.progress span {
+    height: 5px;
+    flex: 1;
+
+    border-radius: 10px;
+
+    background: #f3dce2;
+}
+
+.progress span.active {
+    background: #ed5274;
+}
+
+
+/* =========================================================
+   ВЫБОР ВАРИАНТА
+========================================================= */
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+.option {
+    width: 100%;
+
+    padding: 16px;
+
+    border-radius: 18px;
+
+    background: #fff5f7;
+
+    border: 2px solid transparent;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    text-align: left;
+
+    transition: .2s;
+}
+
+.option:active {
+    transform: scale(.98);
+}
+
+.option.selected {
+    border-color: #ed5274;
+    background: #ffecef;
+}
+
+.option-icon {
+    font-size: 27px;
+}
+
+.option-title {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.option-subtitle {
+    color: #98757e;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   КАЛЕНДАРЬ
+========================================================= */
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.month-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.month-button {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+
+    background: #fff0f3;
+
+    color: #d94d6c;
+
+    font-size: 20px;
+}
+
+.weekdays,
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.weekdays {
+    margin-bottom: 6px;
+}
+
+.weekdays div {
+    font-size: 11px;
+    color: #a78690;
+    padding: 5px 0;
+}
+
+.day {
+    aspect-ratio: 1;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .15s;
+}
+
+.day.available {
+    background: #fff0f3;
+}
+
+.day.available:active {
+    transform: scale(.9);
+}
+
+.day.selected {
+    background: #ed5274;
+    color: white;
+    font-weight: 700;
+}
+
+.day.disabled {
+    color: #d6c5ca;
+}
+
+
+/* =========================================================
+   ВРЕМЯ
+========================================================= */
+
+.time-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+.time {
+    padding: 14px 5px;
+
+    border-radius: 15px;
+
+    background: #fff0f3;
+
+    color: #65414b;
+
+    font-weight: 600;
+
+    border: 2px solid transparent;
+}
+
+.time.selected {
+    background: #ffe3ea;
+    border-color: #ed5274;
+    color: #d6385d;
+}
+
+
+/* =========================================================
+   ИТОГ
+========================================================= */
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    background: #fff2f5;
+
+    text-align: left;
+
+    gap: 12px;
+}
+
+.summary-icon {
+    font-size: 23px;
+}
+
+.summary-label {
+    color: #a17d87;
+    font-size: 12px;
+}
+
+.summary-value {
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   ФИНАЛ
+========================================================= */
+
+.final-heart {
+    font-size: 75px;
+
+    margin-bottom: 15px;
+
+    animation: pop .7s cubic-bezier(.17,.89,.32,1.3);
+}
+
+@keyframes pop {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.final-message {
+    color: #765661;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   ПЛАВАЮЩИЕ СЕРДЦА
+========================================================= */
+
+.floating-heart {
+    position: fixed;
+
+    bottom: -40px;
+
+    pointer-events: none;
+
+    opacity: .6;
+
+    z-index: 0;
+
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    from {
+        transform:
+            translateY(0)
+            rotate(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .65;
+    }
+
+    to {
+        transform:
+            translateY(-115vh)
+            rotate(30deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   КОНФЕТТИ
+========================================================= */
+
+.confetti {
+    position: fixed;
+
+    width: 8px;
+    height: 13px;
+
+    top: -20px;
+
+    z-index: 100;
+
+    animation:
+        confettiFall 3.5s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =========================================================
+   ПОДПИСЬ
+========================================================= */
+
+.signature {
+    margin-top: 25px;
+
+    color: #b18c96;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   МОБИЛЬНЫЕ ЭКРАНЫ
+========================================================= */
+
+@media (max-height: 700px) {
+
+    .card {
+        padding: 25px 20px;
+    }
+
+    .big-heart {
+        width: 70px;
+        height: 70px;
+        font-size: 38px;
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .description {
+        margin-bottom: 18px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     ЭКРАН 1 — ГЛАВНЫЙ
+====================================================== -->
+
+<section class="screen active" id="screen1">
+
+    <div class="card">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <h1>
+            У меня к тебе
+            один вопрос...
+        </h1>
+
+        <p class="description">
+            Я кое-что придумал.
+            Давай сходим куда-нибудь?)
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="primary"
+                onclick="goTo(2)">
+                Хочу узнать
+            </button>
+
+        </div>
+
+        <div class="signature">
+            Это маленькое приглашение только для тебя
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 2 — ВОПРОС
+====================================================== -->
+
+<section class="screen" id="screen2">
+
+    <div class="card">
+
+        <div class="progress">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <h2>
+            Пойдёшь со мной?
+        </h2>
+
+        <p class="description">
+            Обещаю, скучно не будет.
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="primary"
+                onclick="goTo(3)">
+                Да
+            </button>
+
+            <button
+                class="secondary"
+                id="noButton"
+                onclick="noAnswer()">
+                Нет
+            </button>
+
+        </div>
+
+        <button
+            class="back"
+            onclick="goTo(1)">
+            ← Назад
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 3 — ДАТА
+====================================================== -->
+
+<section class="screen" id="screen3">
+
+    <div class="card">
+
+        <div class="progress">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <h2>
+            Когда встретимся? 📅
+        </h2>
+
+        <p class="description">
+            Выбери удобную для тебя дату.
+        </p>
+
+        <div class="calendar-header">
+
+            <button
+                class="month-button"
+                onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+            <div
+                class="month-title"
+                id="monthTitle">
+            </div>
+
+            <button
+                class="month-button"
+                onclick="changeMonth(1)">
+                ›
+            </button>
+
+        </div>
+
+        <div class="weekdays">
+            <div>Пн</div>
+            <div>Вт</div>
+            <div>Ср</div>
+            <div>Чт</div>
+            <div>Пт</div>
+            <div>Сб</div>
+            <div>Вс</div>
+        </div>
+
+        <div
+            class="calendar-grid"
+            id="calendar">
+        </div>
+
+        <button
+            class="primary"
+            style="margin-top:20px"
+            onclick="continueDate()">
+            Продолжить
+        </button>
+
+        <button
+            class="back"
+            onclick="goTo(2)">
+            ← Назад
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 4 — ВРЕМЯ
+====================================================== -->
+
+<section class="screen" id="screen4">
+
+    <div class="card">
+
+        <div class="progress">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <h2>
+            Во сколько? ⏰
+        </h2>
+
+        <p class="description">
+            Выбери время, которое тебе подходит.
+        </p>
+
+        <div id="timeChoice">
+            <div
+                class="time-grid"
+                id="timeGrid">
+            </div>
+        </div>
+
+        <div id="genreChoice" style="display:none">
+            <div class="options" id="genreGrid"></div>
+        </div>
+
+        <button
+            class="primary"
+            onclick="continueTime()">
+            Продолжить
+        </button>
+
+        <button
+            class="back"
+            onclick="goTo(5)">
+            ← Назад
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 5 — МЕСТО
+====================================================== -->
+
+<section class="screen" id="screen5">
+
+    <div class="card">
+
+        <div class="progress">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+        </div>
+
+        <h2>
+            Куда пойдём? 📍
+        </h2>
+
+        <p class="description">
+            Выбирай вариант, который нравится больше.
+        </p>
+
+        <div class="options">
+
+            <button
+                class="option"
+                onclick="selectPlace(this, 'Кинотеатр')">
+
+                <div class="option-icon">
+                    🎬
+                </div>
+
+                <div>
+                    <div class="option-title">
+                        Кинотеатр
+                    </div>
+
+                    <div class="option-subtitle">
+                        Фильм и что-нибудь вкусное
+                    </div>
+                </div>
+
+            </button>
+
+
+            <button
+                class="option"
+                onclick="selectPlace(this, 'Кафе')">
+
+                <div class="option-icon">
+                    ☕
+                </div>
+
+                <div>
+                    <div class="option-title">
+                        Кафе
+                    </div>
+
+                    <div class="option-subtitle">
+                        Посидеть и поговорить
+                    </div>
+                </div>
+
+            </button>
+
+
+            <button
+                class="option"
+                onclick="selectPlace(this, 'Прогулка')">
+
+                <div class="option-icon">
+                    🌆
+                </div>
+
+                <div>
+                    <div class="option-title">
+                        Прогулка
+                    </div>
+
+                    <div class="option-subtitle">
+                        Просто гулять вместе
+                    </div>
+                </div>
+
+            </button>
+
+
+            <button
+                class="option"
+                onclick="selectPlace(this, 'Выбери сама')">
+
+                <div class="option-icon">
+                    💫
+                </div>
+
+                <div>
+                    <div class="option-title">
+                        Выбери сама
+                    </div>
+
+                    <div class="option-subtitle">
+                        Куда ты хотела бы?
+                    </div>
+                </div>
+
+            </button>
+
+        </div>
+
+        <div id="customPlaceBox" style="display:none; margin-top:14px;">
+            <input
+                id="customPlaceInput"
+                type="text"
+                placeholder="Напиши свой вариант"
+                style="width:100%; box-sizing:border-box; padding:15px 16px; border-radius:16px; border:2px solid #f0d6dd; background:#fffafc; color:#65414b; font:inherit; outline:none;"
+            >
+        </div>
+
+        <button
+            class="primary"
+            onclick="continuePlace()">
+            Дальше
+        </button>
+
+        <button
+            class="back"
+            onclick="goTo(3)">
+            ← Назад
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 6 — ПРОВЕРКА
+====================================================== -->
+
+<section class="screen" id="screen6">
+
+    <div class="card">
+
+        <div class="progress">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+        </div>
+
+        <h2>
+            Всё готово?
+        </h2>
+
+        <p class="description">
+            Проверь, всё ли выбрано правильно.
+        </p>
+
+        <div class="summary">
+
+            <div class="summary-item">
+                <div class="summary-icon">📅</div>
+                <div>
+                    <div class="summary-label">Дата</div>
+                    <div class="summary-value" id="summaryDate"></div>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">⏰</div>
+                <div>
+                    <div class="summary-label">Время</div>
+                    <div class="summary-value" id="summaryTime"></div>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">🎬</div>
+                <div>
+                    <div class="summary-label">Жанр</div>
+                    <div class="summary-value" id="summaryGenre"></div>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">📍</div>
+                <div>
+                    <div class="summary-label">Место / вариант</div>
+                    <div class="summary-value" id="summaryPlace"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <button
+            class="primary"
+            onclick="finish()">
+            Подтверждаю
+        </button>
+
+        <button
+            class="back"
+            onclick="goTo(5)">
+            ← Изменить
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ЭКРАН 7 — ФИНАЛ
+====================================================== -->
+
+<section class="screen" id="screen7">
+
+    <div class="card">
+
+        <div class="final-heart">
+            💖
+        </div>
+
+        <h1>
+            Договорились!
+        </h1>
+
+        <p class="final-message">
+            Теперь всё решено.<br>
+            Я буду очень ждать нашей встречи
+        </p>
+
+        <div class="summary">
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    📅
+                </div>
+
+                <div>
+                    <div class="summary-label">
+                        Дата
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="finalDate">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    ⏰
+                </div>
+
+                <div>
+                    <div class="summary-label">
+                        Время
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="finalTime">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="summary-item" id="finalGenreRow">
+
+                <div class="summary-icon">
+                    🎬
+                </div>
+
+                <div>
+                    <div class="summary-label">
+                        Жанр
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="finalGenre">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    📍
+                </div>
+
+                <div>
+                    <div class="summary-label">
+                        Наш план
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="finalPlace">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="signature">
+            До встречи 🥰
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- Отправка ответа владельцу сайта -->
+<form id="responseForm"
+      action="https://script.google.com/macros/s/AKfycbwVDDrR8X2xWgbLIIci51vUrt2q8Xvoa8l9Ik4hgkMXi8wknc1QUhvGtqWArd8Dhw28/exec"
+      method="POST"
+      target="responseFrame"
+      style="display:none;">
+    <input name="answer" id="formAnswer">
+    <input name="date" id="formDate">
+    <input name="time" id="formTime">
+    <input name="place" id="formPlace">
+    <input name="genre" id="formGenre">
+    <input name="userAgent" id="formUserAgent">
+</form>
+<iframe name="responseFrame" style="display:none;"></iframe>
+
+<script>
+
+/* =========================================================
+   ДАННЫЕ ПРИГЛАШЕНИЯ
+========================================================= */
+
+const invitation = {
+
+    date: null,
+
+    time: null,
+
+    genre: null,
+
+    place: null,
+
+    customPlace: null
+
+};
+
+
+/* =========================================================
+   ПЕРЕХОДЫ
+========================================================= */
+
+function goTo(number) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById("screen" + number)
+        .classList.add("active");
+
+}
+
+
+/* =========================================================
+   КНОПКА "НЕТ"
+========================================================= */
+
+let noClicks = 0;
+
+const noTexts = [
+    "Нет",
+    "Точно нет?",
+    "Подумай ещё раз",
+    "Может всё-таки да?",
+    "А если попробовать?",
+    "Дай мне один шанс",
+    "Не так быстро",
+    "Ты уверена?",
+    "Может передумаешь?",
+    "Ладно, подумай ещё",
+    "А вдруг будет здорово?",
+    "Ну скажи уже да"
+];
+
+function noAnswer() {
+
+    const button =
+        document.getElementById("noButton");
+
+    noClicks++;
+
+    const nextIndex =
+        Math.min(noClicks, noTexts.length - 1);
+
+    button.innerText =
+        noTexts[nextIndex];
+
+    // Кнопка снова убегает, как в исходной версии.
+    const x =
+        (Math.random() - .5) * 180;
+
+    const y =
+        (Math.random() - .5) * 100;
+
+    button.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+}
+
+
+/* =========================================================
+   КАЛЕНДАРЬ
+========================================================= */
+
+const today = new Date();
+
+let calendarYear =
+    today.getFullYear();
+
+let calendarMonth =
+    today.getMonth();
+
+function renderCalendar() {
+
+    const calendar =
+        document.getElementById("calendar");
+
+    const title =
+        document.getElementById("monthTitle");
+
+    calendar.innerHTML = "";
+
+    const months = [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь"
+    ];
+
+    title.innerText =
+        months[calendarMonth] +
+        " " +
+        calendarYear;
+
+
+    const firstDay =
+        new Date(
+            calendarYear,
+            calendarMonth,
+            1
+        );
+
+    let start =
+        firstDay.getDay();
+
+    /*
+       JS:
+       воскресенье = 0
+
+       Нам нужно:
+       понедельник = 0
+    */
+
+    start =
+        start === 0
+            ? 6
+            : start - 1;
+
+
+    const daysInMonth =
+        new Date(
+            calendarYear,
+            calendarMonth + 1,
+            0
+        ).getDate();
+
+
+    /* Пустые клетки */
+
+    for (let i = 0; i < start; i++) {
+
+        const empty =
+            document.createElement("div");
+
+        calendar.appendChild(empty);
+
+    }
+
+
+    /* Дни */
+
+    for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ) {
+
+        const button =
+            document.createElement("div");
+
+        button.className =
+            "day";
+
+        button.innerText =
+            day;
+
+
+        const current =
+            new Date(
+                calendarYear,
+                calendarMonth,
+                day
+            );
+
+
+        /*
+           Не разрешаем выбирать
+           даты раньше сегодняшней
+        */
+
+        if (current < startOfDay(today)) {
+
+            button.classList.add(
+                "disabled"
+            );
+
+        } else {
+
+            button.classList.add(
+                "available"
+            );
+
+            button.onclick =
+                () => selectDate(
+                    current,
+                    button
+                );
+
+        }
+
+
+        calendar.appendChild(button);
+
+    }
+
+}
+
+
+function startOfDay(date) {
+
+    return new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    );
+
+}
+
+
+function changeMonth(direction) {
+
+    calendarMonth += direction;
+
+    if (calendarMonth < 0) {
+
+        calendarMonth = 11;
+        calendarYear--;
+
+    }
+
+    if (calendarMonth > 11) {
+
+        calendarMonth = 0;
+        calendarYear++;
+
+    }
+
+    renderCalendar();
+
+}
+
+
+function selectDate(date, element) {
+
+    invitation.date = date;
+
+    document
+        .querySelectorAll(".day")
+        .forEach(day => {
+            day.classList.remove(
+                "selected"
+            );
+        });
+
+    element.classList.add(
+        "selected"
+    );
+
+}
+
+
+function formatDate(date) {
+
+    if (!date) {
+        return "";
+    }
+
+    const months = [
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+    ];
+
+    return (
+        date.getDate() +
+        " " +
+        months[date.getMonth()] +
+        " " +
+        date.getFullYear()
+    );
+
+}
+
+
+function continueDate() {
+
+    if (!invitation.date) {
+
+        alert(
+            "Сначала выбери дату"
+        );
+
+        return;
+
+    }
+
+    goTo(5);
+
+}
+
+
+/* =========================================================
+   ВРЕМЯ
+========================================================= */
+
+const times = [
+    "19:00",
+    "19:30",
+    "20:00",
+    "20:30",
+    "21:00",
+    "21:30",
+    "22:00",
+    "22:30",
+    "23:00",
+    "23:30",
+    "00:00",
+    "00:30"
+];
+
+
+function renderTimes() {
+
+    const grid =
+        document.getElementById(
+            "timeGrid"
+        );
+
+    grid.innerHTML = "";
+
+
+    times.forEach(time => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.className =
+            "time";
+
+        button.innerText =
+            time;
+
+
+        button.onclick = () => {
+
+            invitation.time =
+                time;
+
+            document
+                .querySelectorAll(".time")
+                .forEach(item => {
+                    item.classList.remove(
+                        "selected"
+                    );
+                });
+
+            button.classList.add(
+                "selected"
+            );
+
+        };
+
+
+        grid.appendChild(button);
+
+    });
+
+}
+
+
+function prepareTimeScreen() {
+
+    document.querySelector("#screen4 h2").innerText = "Во сколько? ⏰";
+    document.querySelector("#screen4 .description").innerText = "Выбери время, которое тебе подходит.";
+    document.getElementById("timeChoice").style.display = "block";
+    document.getElementById("genreChoice").style.display = "none";
+
+}
+
+function prepareGenreScreen() {
+
+    document.querySelector("#screen4 h2").innerText = "Какой фильм? 🎬";
+    document.querySelector("#screen4 .description").innerText = "Выбери жанр, который хочется посмотреть.";
+    document.getElementById("timeChoice").style.display = "none";
+    document.getElementById("genreChoice").style.display = "block";
+
+    const genres = [
+        ["Комедия", "😂", "Посмеяться и хорошо провести вечер"],
+        ["Ужасы", "👻", "Немного мурашек и острых ощущений"],
+        ["Триллер", "🔎", "Напряжённо и захватывающе"],
+        ["Фантастика", "🚀", "Другие миры и невероятные истории"],
+        ["Романтика", "💕", "Тёплая история о любви"],
+        ["Приключения", "🗺️", "Путешествия, тайны и приключения"]
+    ];
+
+    const grid = document.getElementById("genreGrid");
+    grid.innerHTML = "";
+    genres.forEach(([genre, icon, desc]) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.innerHTML = `<div class="option-icon">${icon}</div><div><div class="option-title">${genre}</div><div class="option-subtitle">${desc}</div></div>`;
+        button.onclick = () => {
+            invitation.genre = genre;
+            grid.querySelectorAll(".option").forEach(x => x.classList.remove("selected"));
+            button.classList.add("selected");
+        };
+        grid.appendChild(button);
+    });
+
+}
+
+function continueTime() {
+
+    if (invitation.place === "Кинотеатр") {
+        if (!invitation.genre) {
+            alert("Выбери жанр фильма");
+            return;
+        }
+        updateSummary();
+        goTo(6);
+        return;
+    }
+
+    if (!invitation.time) {
+        alert("Выбери время");
+        return;
+    }
+
+    updateSummary();
+    goTo(6);
+
+}
+
+
+/* =========================================================
+   МЕСТО
+========================================================= */
+
+function selectPlace(
+    element,
+    place
+) {
+
+    invitation.place = place;
+    invitation.customPlace = null;
+
+    document
+        .querySelectorAll(".option")
+        .forEach(item => item.classList.remove("selected"));
+
+    element.classList.add("selected");
+
+    const customBox = document.getElementById("customPlaceBox");
+    const customInput = document.getElementById("customPlaceInput");
+
+    if (place === "Выбери сама") {
+        customBox.style.display = "block";
+        customInput.focus();
+    } else {
+        customBox.style.display = "none";
+        customInput.value = "";
+    }
+
+}
+
+
+function updateSummary() {
+
+    document.getElementById("summaryDate").innerText =
+        invitation.date ? formatDate(invitation.date) : "—";
+
+    document.getElementById("summaryTime").innerText =
+        invitation.time || "—";
+
+    document.getElementById("summaryGenre").innerText =
+        invitation.genre || "—";
+
+    document.getElementById("summaryPlace").innerText =
+        invitation.place === "Выбери сама"
+            ? (invitation.customPlace || "—")
+            : (invitation.place || "—");
+
+}
+
+
+function continuePlace() {
+
+    if (!invitation.place) {
+        alert("Выбери один вариант");
+        return;
+    }
+
+    if (invitation.place === "Выбери сама") {
+        const value = document.getElementById("customPlaceInput").value.trim();
+        if (!value) {
+            alert("Напиши свой вариант");
+            document.getElementById("customPlaceInput").focus();
+            return;
+        }
+        invitation.customPlace = value;
+    } else {
+        invitation.customPlace = null;
+    }
+
+    if (invitation.place === "Кинотеатр") {
+        invitation.time = "";
+        invitation.genre = "";
+        prepareGenreScreen();
+    } else {
+        invitation.genre = "";
+        prepareTimeScreen();
+    }
+
+    goTo(4);
+
+}
+
+
+function finish() {
+
+    document.getElementById(
+        "finalDate"
+    ).innerText =
+        formatDate(
+            invitation.date
+        );
+
+
+    document.getElementById(
+        "finalTime"
+    ).innerText =
+        invitation.time || "—";
+
+
+    document.getElementById(
+        "finalPlace"
+    ).innerText =
+        invitation.place === "Выбери сама"
+            ? (invitation.customPlace || "—")
+            : invitation.place;
+\n\n    document.getElementById("finalGenre").innerText =\n        invitation.genre || "—";\n    document.getElementById("finalGenreRow").style.display =\n        invitation.genre ? "flex" : "none";\n
+    // Отправляем выбранные ответы владельцу сайта.
+    document.getElementById("formAnswer").value = "Да";
+    document.getElementById("formDate").value =
+        formatDate(invitation.date);
+    document.getElementById("formTime").value =
+        invitation.time || "";
+    document.getElementById("formPlace").value =
+        invitation.place === "Выбери сама"
+            ? ("Выбери сама: " + (invitation.customPlace || ""))
+            : invitation.place;
+    document.getElementById("formGenre").value =
+        invitation.genre || "";
+
+    document.getElementById("formUserAgent").value =
+        navigator.userAgent;
+
+    document.getElementById("responseForm").submit();
+
+    goTo(7);
+
+    createConfetti();
+
+}
+
+
+/* =========================================================
+   ПЛАВАЮЩИЕ СЕРДЦА
+========================================================= */
+
+function createFloatingHeart() {
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+    heart.className =
+        "floating-heart";
+
+
+    const symbols = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "♡"
+    ];
+
+
+    heart.innerText =
+        symbols[
+            Math.floor(
+                Math.random() *
+                symbols.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    heart.style.fontSize =
+        15 +
+        Math.random() * 25 +
+        "px";
+
+
+    heart.style.animationDuration =
+        5 +
+        Math.random() * 5 +
+        "s";
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        () => heart.remove(),
+        10000
+    );
+
+}
+
+
+setInterval(
+    createFloatingHeart,
+    900
+);
+
+
+/* =========================================================
+   КОНФЕТТИ
+========================================================= */
+
+function createConfetti() {
+
+    for (
+        let i = 0;
+        i < 120;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        piece.style.background =
+            `hsl(
+                ${Math.random() * 360},
+                80%,
+                65%
+            )`;
+
+
+        piece.style.animationDelay =
+            Math.random() * 1.2 +
+            "s";
+
+
+        piece.style.transform =
+            `rotate(
+                ${Math.random() * 360}deg
+            )`;
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => piece.remove(),
+            4500
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ЗАПУСК
+========================================================= */
+
+renderCalendar();
+
+renderTimes();
+
+</script>
+
+</body>
+</html>
